@@ -1,0 +1,49 @@
+WWWWWWW
+W     W
+W  W  W
+W WW  W
+WEW S W
+WWWWWWW
+
+
+START:
+0. Are we there yet?
+    If yes
+	- We found a path
+	- Start following the path
+    If no 
+	- Continue on as normal
+
+1. Is there a wall or have you already been to the left?
+    If Yes
+	- Don't Try
+    If No
+	- Mark current location
+	- Add this location to the current path
+	- Go to start
+
+2. Is there a wall or have you already been to the right?
+    If Yes
+	- Don't Try
+    If No
+	- Mark current location
+	- Add this location to the current path
+	- Try to go there
+ 
+3. Is there a wall or have you already been up?
+    If Yes
+	- Don't Try
+    If No
+	- Mark current location
+	- Add this location to the current path
+	- Try to go there
+
+4. Is there a wall or have you already been down?
+    If Yes
+	- Don't Try
+    If No
+	- Mark current location
+	- Add this location to the current path
+	- Try to go there
+
+ 
