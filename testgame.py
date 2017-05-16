@@ -29,5 +29,4 @@ while running:
                 myrect.x=myrect.x+5
         if key[pygame.K_SPACE]:
                 pygame.quit()
-                 running=False
-                                
+                running=False
