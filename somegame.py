@@ -9,7 +9,41 @@ clock = pygame.time.Clock()
 running=True
 # 40x30
 walls = [(0,0),(1,1),(2,2)]
+wallsrects = []
+for i in walls:
+        wallsrects.append(pygame.Rect(i[0]*16,i[1]*16,16,16))
+
 wrect = pygame.Rect(0,0,16,16)
+
+# move_axis = move one axis at a time
+# NOTE: do not move more than one axis at at time
+# person - is the rect of the object we want to move
+# dx - the amount to move in the x direction
+# dy - the amount to move in the y direction
+def move_axis(person,dx,dy):
+        person.x = person.x + dx
+        person.y = person.y + dy
+        # This is where we check for walls
+        for i in wallsrects:
+                if person.colliderect(i):
+                        if dx>0:
+                                person.right=i.left
+                        if dx<0:
+                                person.left=i.right
+                        if dy>0:
+                                person.bottom=i.top
+                        if dy<0:
+                                person.top=i.bottom
+
+# person - is the rect of the object we want to move
+# dx - the amount to move in the x direction
+# dy - the amount to move in the y direction
+def move(person,dx,dy):
+        if dx != 0:
+                move_axis(person,dx,0)
+        if dy != 0:
+                move_axis(person,0,dy)
+
 while running:
         clock.tick(300)
         screen.fill((66, 164, 244))
@@ -29,14 +63,10 @@ while running:
                 pygame.quit()
                 running=False
         if key[pygame.K_UP]:
-                if myrect.y>0:
-                        myrect.y=myrect.y-1
+                move(myrect,0,-1)
         if key[pygame.K_DOWN]:
-                if myrect.y<480-16:
-                        myrect.y=myrect.y+1
+                move(myrect,0,1)
         if key[pygame.K_LEFT]:
-                if myrect.x>0:
-                        myrect.x=myrect.x-1
+                move(myrect,-1,0)
         if key[pygame.K_RIGHT]:
-                if myrect.x<640-16:
-                        myrect.x=myrect.x+1
+                move(myrect,1,0)
