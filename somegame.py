@@ -8,7 +8,52 @@ brick = pygame.image.load("brick16x16.png")
 clock = pygame.time.Clock()
 running=True
 # 40x30
-walls = [(0,0),(1,1),(2,2)]
+mymap = [
+"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+]
+walls = []
+
+# Each row
+wx = 0
+wy = 0
+for i in mymap:
+        # Each Column
+        for j in i:
+                if j=="W":
+                        walls.append((wx,wy))
+                wx=wx+1
+        wy=wy+1
+        wx=0
+
 wallsrects = []
 for i in walls:
         wallsrects.append(pygame.Rect(i[0]*16,i[1]*16,16,16))
