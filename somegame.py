@@ -5,6 +5,7 @@ screen = pygame.display.set_mode((640, 480))
 myrect = pygame.Rect(128,128,16,16)
 image = pygame.image.load("player.png")
 brick = pygame.image.load("brick16x16.png")
+tree = pygame.image.load("tree16x16.png")
 clock = pygame.time.Clock()
 running=True
 # 40x30
@@ -18,18 +19,18 @@ mymap = [
 "W                                      W",
 "W                                      W",
 "W                                      W",
+"W                TT  TTT               W",
+"W                 TTT                  W",
+"W                TT T                  W",
+"W                                      W",
+"W                                      W",
+"W                                      W",
+"W                   W                  W",
 "W                                      W",
 "W                                      W",
 "W                                      W",
 "W                                      W",
-"W                                      W",
-"W                                      W",
-"W                                      W",
-"W                                      W",
-"W                                      W",
-"W                                      W",
-"W                                      W",
-"W                                      W",
+"W                   W                  W",
 "W                                      W",
 "W                                      W",
 "W                                      W",
@@ -41,7 +42,7 @@ mymap = [
 "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
 ]
 walls = []
-
+trees = []
 # Each row
 wx = 0
 wy = 0
@@ -50,12 +51,16 @@ for i in mymap:
         for j in i:
                 if j=="W":
                         walls.append((wx,wy))
+                if j=="T":
+                        trees.append((wx,wy))
                 wx=wx+1
         wy=wy+1
         wx=0
 
 wallsrects = []
 for i in walls:
+        wallsrects.append(pygame.Rect(i[0]*16,i[1]*16,16,16))
+for i in trees:
         wallsrects.append(pygame.Rect(i[0]*16,i[1]*16,16,16))
 
 wrect = pygame.Rect(0,0,16,16)
@@ -78,7 +83,7 @@ def move_axis(person,dx,dy):
                         if dy>0:
                                 person.bottom=i.top
                         if dy<0:
-                                person.top=i.bottom
+                                person.top=i.bottom        
 
 # person - is the rect of the object we want to move
 # dx - the amount to move in the x direction
@@ -97,6 +102,10 @@ while running:
                 wrect.x=i[0]*16
                 wrect.y=i[1]*16
                 screen.blit(brick,wrect)
+        for i in trees:
+                wrect.x=i[0]*16
+                wrect.y=i[1]*16
+                screen.blit(tree,wrect)
         pygame.display.flip()
         events = pygame.event.get()
         for event in events:
